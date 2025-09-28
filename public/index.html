@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Pedidos de Restaurante</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Gestor de Pedidos del Restaurante</h1>
+
+    <div id="auth-section">
+        
+        <h2>Login / Registro</h2>
+
+        <section>
+            <h3>Login</h3>
+            <form id="login-form">
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="text" id="login-telefono" placeholder="Teléfono (555-1234)" required>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        </section>
+
+        <section>
+            <h3>Registro</h3>
+            <form id="register-form">
+                <input type="text" id="register-nombre" placeholder="Nombre" required>
+                <input type="email" id="register-email" placeholder="Email" required>
+                <input type="text" id="register-telefono" placeholder="Teléfono" required>
+                <button type="submit">Registrarse</button>
+            </form>
+        </section>
+
+    </div>
+
+    <div id="orders-section" style="display: none;">
+        
+        <h2>Bienvenido, <span id="client-name-display">Cliente</span></h2>
+
+        <section>
+            <h3>Crear Nuevo Pedido</h3>
+            <form id="add-order-form">
+                <input type="text" id="order-platillo" placeholder="Nombre del Platillo (Ej: Pizza Margherita)" required>
+                <textarea id="order-notas" placeholder="Notas (Ej: Sin cebolla, extra queso)"></textarea>
+                <button type="submit">Hacer Pedido</button>
+            </form>
+        </section>
+
+        <section>
+            <h3>Mis Pedidos</h3>
+            <div id="orders-list">
+                <p>Cargando pedidos...</p>
+            </div>
+        </section>
+        
+        <button id="logout-button">Cerrar Sesión</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
