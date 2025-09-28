@@ -1,8 +1,9 @@
 // Carga las variables de entorno del archivo .env
 require('dotenv').config(); 
 const express = require('express');
-const { Pool } = require('pg'); // ¡CORRECCIÓN: Se desestructura Pool con llaves {}!
+const { Pool } = require('pg'); 
 const cors = require('cors');
+const path = require('path'); // Importa la librería 'path'
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -14,15 +15,18 @@ const pool = new Pool({
     database: process.env.DB_DATABASE,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
-    // Configuración SSL: Necesario para conectarse a Render
     ssl: {
         rejectUnauthorized: false
     }
 });
 
 // Middlewares
-app.use(cors()); // Permite peticiones del frontend
-app.use(express.json()); // Permite a Express leer JSON en el body de las peticiones
+app.use(cors()); 
+app.use(express.json()); 
+
+// ** CLAVE: Sirve archivos estáticos de la carpeta 'public' (Frontend) **
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Test de conexión a la base de datos
 pool.connect((err, client, done) => {
@@ -169,7 +173,6 @@ app.put('/ordenes/:id/estado', async (req, res) => {
         } else if (currentState === 'delivered') {
             return res.status(400).json({ message: 'La orden ya fue entregada.' });
         } else {
-            // Este caso no debería pasar debido a la restricción CHECK en la DB
             return res.status(400).json({ message: 'Estado de orden desconocido.' });
         }
 
